@@ -303,6 +303,7 @@ const ResultsTabularView = (props) => {
                     columns={tableHeaders}
                     expandedRowRender={expandedRowRender}
                     pagination={false}
+                    scroll={{y: 400}}
                 />
             </div>
         </>
