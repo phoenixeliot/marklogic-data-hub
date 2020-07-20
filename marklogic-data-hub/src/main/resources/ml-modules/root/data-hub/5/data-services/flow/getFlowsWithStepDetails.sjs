@@ -23,7 +23,6 @@ const flows = Artifacts.getArtifacts("flow");
 // Find all stepIds so we can retrieve them in one query
 const stepIds = [];
 flows.forEach(flow => {
-  flow = flow.toObject();
   Object.keys(flow.steps).forEach(key => {
     if (flow.steps[key].stepId) {
       stepIds.push(flow.steps[key].stepId);
@@ -50,7 +49,6 @@ for (var step of steps) {
 
 // Iterate over flows again to return the desired results
 flows.map(flow => {
-  flow = flow.toObject();
   const flowWithStepDetails = {name: flow.name};
   if (flow.description) {
     flowWithStepDetails.description = flow.description;
@@ -70,9 +68,12 @@ flows.map(flow => {
           ds.throwServerError(`Unable to find referenced step with ID ${stepId} in flow ${flow.name}`);
         }
       }
+      stepDetails.stepId = stepId;
       stepDetails.stepName = step.name;
       stepDetails.stepDefinitionType = step.stepDefinitionType;
       stepDetails.sourceFormat = step.sourceFormat;
+      // accommodating targetEntity which is still used by mastering (match/merge) for the time being
+      stepDetails.targetEntityType = step.targetEntityType || step.targetEntity;
     });
   }
   return flowWithStepDetails;

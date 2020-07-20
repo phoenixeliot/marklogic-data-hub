@@ -17,7 +17,7 @@
 
 const Artifacts = require('/data-hub/5/artifacts/core.sjs');
 
-var artifactType;
+var artifactType, propertiesToReturn, groupByEntityType;
 
 Artifacts.getArtifacts(artifactType);
 
