@@ -286,6 +286,15 @@ const ResultsTabularView = (props) => {
         />
     }
 
+    for (const col of tableHeaders) {
+        if (col.dataIndex === 'address') {
+            col.width = 254;
+        }
+        if (col.dataIndex === 'orderDetails') {
+            col.width = 375;
+        }
+    }
+
     return (
         <>
             <div className={styles.icon}>
@@ -305,7 +314,7 @@ const ResultsTabularView = (props) => {
                     columns={tableHeaders}
                     expandedRowRender={expandedRowRender}
                     pagination={false}
-                    scroll={{y: 400}}
+                    scroll={{y: true, x: 1200}}
                 />
             </div>
         </>
